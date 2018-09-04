@@ -7,7 +7,7 @@ config_file_path="${config_file_dir}/config.json"
 
 setup_config()
 {
-    test -d $config_file_dir || mkdir $config_file_dir
+    test -d $config_file_dir || mkdir $config_file_dir -p
     cat << EOF >$config_file_path
     {
       "server":"0.0.0.0",
