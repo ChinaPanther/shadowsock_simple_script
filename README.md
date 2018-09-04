@@ -1,0 +1,1 @@
+# shadowsock_simple_script
