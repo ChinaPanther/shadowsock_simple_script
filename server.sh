@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #set -e 
 #set -x
+#适用于 centos 7
 
 config_file_dir="/etc/shadowsocks"
 config_file_path="${config_file_dir}/config.json"
@@ -62,8 +63,8 @@ EOF
 print_help()
 {
     echo "  --------------------------------请执行--------------------------------------"
-    echo " \"systemctl restart vpns\"               来重启服务"
-    echo " \"ps -C ssserver h\"                     可查看服务是否正在运行"
+    echo " \"systemctl restart vpns\"               来重启服务 (修改配置文件后，应执行此命令重启服务)"
+    echo " \"ps aux|grep ssserver\"                 可查看服务是否正在运行"
 }
 
 main()
