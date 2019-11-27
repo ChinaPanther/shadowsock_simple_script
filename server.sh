@@ -40,7 +40,7 @@ setup_server_app()
 
 add_startup()
 {
-    cat << EOF > /usr/lib/systemd/system/vpns.service
+    cat << EOF > /lib/systemd/system/vpns.service
 [Unit]
 Description=Shadowsocks server
 After=syslog.target network.target
@@ -56,6 +56,7 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 EOF
+    cat /lib/systemd/system/vpns.service
 }
 
 print_help()
@@ -70,6 +71,7 @@ main()
     setup_server_app
     setup_config
     add_startup
+    systemctl enable vpns.service
 }
 
 main
