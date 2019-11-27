@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-#set -e 
-#set -x
+set -e 
+set -x
 
 config_file_dir="/etc/shadowsocks"
 config_file_path="${config_file_dir}/config.json"
@@ -46,6 +46,26 @@ setup_server_app_ubuntu()
     sudo pip install shadowsocks
 }
 
+add_startup()
+{
+    cat << EOF > /usr/lib/systemd/system/vpns.service
+[Unit]
+Description=Shadowsocks server
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+ExecStart=/usr/bin/ssserver -c /etc/shadowsocks/config.json -d start
+ExecStop=/usr/bin/ssserver -c /etc/shadowsocks/config.json -d stop
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+}
+
 print_help()
 {
     echo "  --------------------------------请执行--------------------------------------"
@@ -78,6 +98,7 @@ main()
         exit
     fi
     setup_config
+    add_startup
 }
 
 main
