@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #set -e 
 #set -x
-#适用于 centos 7
+#适用于 centos 6
 
 config_file_dir="/etc/shadowsocks"
 config_file_path="${config_file_dir}/config.json"
